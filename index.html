@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Challenge Test — 3rd Grade</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #dbeafe;
+      --secondary: #f59e0b;
+      --secondary-light: #fef3c7;
+      --success: #16a34a;
+      --success-light: #dcfce7;
+      --danger: #dc2626;
+      --danger-light: #fee2e2;
+      --purple: #7c3aed;
+      --purple-light: #ede9fe;
+      --bg: #f0f9ff;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #e0f2fe 0%, #fef9c3 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    /* Header Card */
+    .header-card {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.12);
+      border: 4px solid #60a5fa;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .badge-grade {
+      background: var(--secondary);
+      color: #fff;
+      font-weight: 800;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.9rem;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .score-pill {
+      background: #eff6ff;
+      border: 3px solid var(--primary);
+      border-radius: 20px;
+      padding: 10px 20px;
+      text-align: center;
+      min-width: 140px;
+    }
+
+    .score-pill span {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .score-pill strong {
+      font-size: 1.7rem;
+      color: var(--primary);
+    }
+
+    .student-fields {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      background: #f8fafc;
+      padding: 14px;
+      border-radius: 16px;
+      border: 2px dashed #93c5fd;
+    }
+
+    .field-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #334155;
+      margin-bottom: 4px;
+    }
+
+    .field-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      font-size: 1rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .field-group input:focus {
+      border-color: var(--primary);
+    }
+
+    /* Section Banners */
+    .part-banner {
+      background: linear-gradient(90deg, var(--primary), #3b82f6);
+      color: white;
+      padding: 14px 22px;
+      border-radius: 18px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin: 28px 0 16px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Question Card */
+    .q-card {
+      background: var(--card);
+      border-radius: 22px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+      border: 3px solid #e2e8f0;
+      transition: border-color 0.25s;
+    }
+
+    .q-card.graded-correct {
+      border-color: var(--success);
+      background: #f0fdf4;
+    }
+
+    .q-card.graded-partial {
+      border-color: var(--secondary);
+      background: #fffbeb;
+    }
+
+    .q-card.graded-wrong {
+      border-color: var(--danger);
+      background: #fef2f2;
+    }
+
+    .q-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .q-num {
+      background: #dbeafe;
+      color: var(--primary);
+      border: 3px solid #60a5fa;
+      font-weight: 900;
+      font-size: 1.3rem;
+      min-width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .q-title {
+      font-size: 1.12rem;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .q-title strong {
+      color: #0f172a;
+    }
+
+    /* Figure 1 Interactive Counting */
+    .figure-box {
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .figure-caption {
+      font-size: 0.92rem;
+      color: var(--muted);
+      font-weight: 700;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .count-row-wrapper {
+      margin-bottom: 14px;
+      padding: 10px 12px;
+      background: #ffffff;
+      border-radius: 14px;
+      border: 2px solid #e2e8f0;
+    }
+
+    .count-row-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: #334155;
+    }
+
+    .tap-counter-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+    }
+
+    .items-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .count-item {
+      font-size: 1.65rem;
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      cursor: pointer;
+      user-select: none;
+      border: 2px solid transparent;
+      transition: transform 0.12s, background 0.15s, border-color 0.15s;
+      position: relative;
+    }
+
+    .count-item:hover {
+      transform: scale(1.12);
+      background: #f1f5f9;
+    }
+
+    .count-item.counted {
+      background: #dcfce7;
+      border-color: #22c55e;
+      transform: scale(0.96);
+    }
+
+    .count-item.counted::after {
+      content: "✓";
+      position: absolute;
+      bottom: -4px;
+      right: -2px;
+      background: #16a34a;
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 900;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Inputs grid for Q1 */
+    .write-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .write-box {
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .write-box label {
+      display: block;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #1e293b;
+    }
+
+    .word-input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-align: center;
+      text-transform: uppercase;
+      border-radius: 12px;
+      border: 3px solid #93c5fd;
+      outline: none;
+      letter-spacing: 1px;
+    }
+
+    .word-input:focus {
+      border-color: var(--primary);
+      background: #eff6ff;
+    }
+
+    /* Match Pill Buttons (Q2, Q4, Q9) */
+    .match-table {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .match-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 12px 16px;
+    }
+
+    .match-prompt {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a;
+      min-width: 140px;
+    }
+
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill-btn {
+      min-width: 52px;
+      min-height: 48px;
+      padding: 8px 16px;
+      border-radius: 14px;
+      border: 3px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .pill-btn:hover {
+      border-color: var(--primary);
+      background: #eff6ff;
+    }
+
+    .pill-btn.selected {
+      background: var(--primary);
+      border-color: #1d4ed8;
+      color: #ffffff;
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+    }
+
+    .legend-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .legend-tag {
+      background: var(--secondary-light);
+      border: 2px solid #f59e0b;
+      color: #92400e;
+      font-weight: 800;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 1rem;
+    }
+
+    /* Missing Letters Q3 */
+    .spelling-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .spelling-card {
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .spelling-num {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .letter-slots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .fixed-letter {
+      width: 38px;
+      height: 46px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #1e293b;
+    }
+
+    .slot-input {
+      width: 42px;
+      height: 46px;
+      border-radius: 10px;
+      border: 3px solid var(--primary);
+      background: #ffffff;
+      text-align: center;
+      font-size: 1.35rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--primary);
+      outline: none;
+    }
+
+    .slot-input:focus {
+      background: #dbeafe;
+      transform: scale(1.06);
+    }
+
+    /* Action Scenes Figure 2 */
+    .scenes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .scene-card {
+      border: 3px solid #1e293b;
+      border-radius: 16px;
+      padding: 10px;
+      background: #ffffff;
+      text-align: center;
+      position: relative;
+    }
+
+    .scene-letter {
+      position: absolute;
+      top: 8px;
+      left: 12px;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    /* Circle the Word Options (Q5, Q6, Q7) */
+    .sentence-row {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .word-choice {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 3px dashed #94a3b8;
+      background: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .word-choice:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .word-choice.circled {
+      border: 4px solid #2563eb;
+      background: #dbeafe;
+      color: #1e3a8a;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+      transform: scale(1.06);
+    }
+
+    .explain-box {
+      margin-top: 12px;
+      width: 100%;
+    }
+
+    .explain-box label {
+      display: block;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    .explain-input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 2px solid #93c5fd;
+      font-size: 1.05rem;
+      outline: none;
+    }
+
+    .explain-input:focus {
+      border-color: var(--primary);
+    }
+
+    /* Robot Inspection Q8 */
+    .robot-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    @media (max-width: 680px) {
+      .robot-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .robot-svg-box {
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 18px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .shape-counters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .counter-card {
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .counter-card h4 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      color: #0f172a;
+    }
+
+    .stepper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .step-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      border: none;
+      background: var(--primary);
+      color: white;
+      font-size: 1.6rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-btn:active {
+      transform: scale(0.94);
+    }
+
+    .step-val {
+      font-size: 1.6rem;
+      font-weight: 900;
+      min-width: 36px;
+      color: #0f172a;
+    }
+
+    /* Drawing Canvas Q10 */
+    .canvas-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+      background: #f1f5f9;
+      padding: 10px 14px;
+      border-radius: 14px;
+    }
+
+    .color-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .color-dot.active {
+      transform: scale(1.2);
+      outline: 3px solid #0f172a;
+    }
+
+    .tool-btn {
+      padding: 8px 14px;
+      border-radius: 12px;
+      border: 2px solid #cbd5e1;
+      background: white;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .tool-btn:hover {
+      background: #e2e8f0;
+    }
+
+    #drawCanvas {
+      width: 100%;
+      height: 270px;
+      background: #ffffff;
+      border: 4px solid #334155;
+      border-radius: 18px;
+      touch-action: none;
+      cursor: crosshair;
+      display: block;
+    }
+
+    /* Feedback Tag inside question */
+    .q-feedback {
+      margin-top: 14px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.98rem;
+      display: none;
+    }
+
+    .q-feedback.show {
+      display: block;
+    }
+
+    .fb-ok {
+      background: var(--success-light);
+      color: #14532d;
+      border: 2px solid #86efac;
+    }
+
+    .fb-part {
+      background: var(--secondary-light);
+      color: #78350f;
+      border: 2px solid #fcd34d;
+    }
+
+    .fb-bad {
+      background: var(--danger-light);
+      color: #7f1d1d;
+      border: 2px solid #fca5a5;
+    }
+
+    /* Submit & Results Panel */
+    .submit-area {
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .btn-finish {
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      color: white;
+      border: none;
+      padding: 18px 36px;
+      font-size: 1.35rem;
+      font-weight: 900;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(22, 163, 74, 0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-finish:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(22, 163, 74, 0.45);
+    }
+
+    .results-modal {
+      display: none;
+      margin-top: 28px;
+      background: #ffffff;
+      border: 5px solid #22c55e;
+      border-radius: 26px;
+      padding: 28px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      animation: popIn 0.35s ease-out;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .stars-display {
+      font-size: 2.8rem;
+      margin-bottom: 8px;
+    }
+
+    .final-grade-big {
+      font-size: 3.6rem;
+      font-weight: 900;
+      color: var(--primary);
+      margin: 6px 0;
+    }
+
+    .result-message {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 18px;
+    }
+
+    .breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(82px, 1fr));
+      gap: 8px;
+      margin: 18px 0 22px;
+    }
+
+    .bd-item {
+      padding: 10px 6px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      border: 2px solid #cbd5e1;
+    }
+
+    .bd-ok { background: #dcfce7; border-color: #22c55e; color: #14532d; }
+    .bd-part { background: #fef3c7; border-color: #f59e0b; color: #78350f; }
+    .bd-bad { background: #fee2e2; border-color: #ef4444; color: #7f1d1d; }
+
+    .btn-retry {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HEADER -->
+    <div class="header-card">
+      <div class="header-top">
+        <div>
+          <span class="badge-grade">3RD GRADE • ELEMENTARY ENGLISH</span>
+          <h1>ENGLISH CHALLENGE TEST</h1>
+        </div>
+        <div class="score-pill">
+          <span>Your Score</span>
+          <strong id="topScore">__ / 10</strong>
+        </div>
+      </div>
+
+      <div class="student-fields">
+        <div class="field-group">
+          <label for="studentName">Name (Nombre del estudiante):</label>
+          <input type="text" id="studentName" placeholder="Write your name here..." />
+        </div>
+        <div class="field-group">
+          <label for="teacherName">Teacher (Docente):</label>
+          <input type="text" id="teacherName" placeholder="Teacher's name..." />
+        </div>
+        <div class="field-group">
+          <label for="testDate">Date (Fecha):</label>
+          <input type="date" id="testDate" />
+        </div>
+      </div>
+    </div>
+
+    <!-- PART I -->
+    <div class="part-banner">🔢 PART I: NUMBERS 1 – 20 (Counting &amp; Spelling)</div>
+
+    <!-- QUESTION 1 -->
+    <div class="q-card" id="card-q1">
+      <div class="q-header">
+        <div class="q-num">1</div>
+        <p class="q-title">
+          <strong>Count and Write:</strong> Count the objects in each row of Figure 1 and write the exact number in English words.
+        </p>
+      </div>
+
+      <div class="figure-box">
+        <div class="count-row-wrapper">
+          <div class="count-row-label">
+            <span>Row A (Red Apples) — Tap each apple to help count!</span>
+            <span class="tap-counter-badge" id="tap-apples">Tapped: 0</span>
+          </div>
+          <div class="items-grid" id="row-apples"></div>
+        </div>
+
+        <div class="count-row-wrapper">
+          <div class="count-row-label">
+            <span>Row B (Blue Stars) — Tap each star to help count!</span>
+            <span class="tap-counter-badge" id="tap-stars">Tapped: 0</span>
+          </div>
+          <div class="items-grid" id="row-stars"></div>
+        </div>
+
+        <div class="count-row-wrapper" style="margin-bottom:0;">
+          <div class="count-row-label">
+            <span>Row C (Yellow Pencils) — Tap each pencil to help count!</span>
+            <span class="tap-counter-badge" id="tap-pencils">Tapped: 0</span>
+          </div>
+          <div class="items-grid" id="row-pencils"></div>
+        </div>
+
+        <div class="figure-caption">Figure 1: Count carefully from left to right in each row.</div>
+      </div>
+
+      <div class="write-grid-3">
+        <div class="write-box">
+          <label for="q1-a">Row A (Red Apples)</label>
+          <input type="text" class="word-input" id="q1-a" placeholder="Type word..." autocomplete="off" />
+        </div>
+        <div class="write-box">
+          <label for="q1-b">Row B (Blue Stars)</label>
+          <input type="text" class="word-input" id="q1-b" placeholder="Type word..." autocomplete="off" />
+        </div>
+        <div class="write-box">
+          <label for="q1-c">Row C (Yellow Pencils)</label>
+          <input type="text" class="word-input" id="q1-c" placeholder="Type word..." autocomplete="off" />
+        </div>
+      </div>
+      <div class="q-feedback" id="fb-q1"></div>
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div class="q-card" id="card-q2">
+      <div class="q-header">
+        <div class="q-num">2</div>
+        <p class="q-title">
+          <strong>Number Match:</strong> Tap the matching letter (<strong>A</strong>, <strong>B</strong>, or <strong>C</strong>) next to each number.
+        </p>
+      </div>
+
+      <div class="legend-box">
+        <div class="legend-tag">A. TWENTY</div>
+        <div class="legend-tag">B. FOURTEEN</div>
+        <div class="legend-tag">C. ELEVEN</div>
+      </div>
+
+      <div class="match-table">
+        <div class="match-row">
+          <div class="match-prompt">Number: <strong>11</strong></div>
+          <div class="pill-group" data-question="q2-11">
+            <button type="button" class="pill-btn" data-val="A">A</button>
+            <button type="button" class="pill-btn" data-val="B">B</button>
+            <button type="button" class="pill-btn" data-val="C">C</button>
+          </div>
+        </div>
+        <div class="match-row">
+          <div class="match-prompt">Number: <strong>20</strong></div>
+          <div class="pill-group" data-question="q2-20">
+            <button type="button" class="pill-btn" data-val="A">A</button>
+            <button type="button" class="pill-btn" data-val="B">B</button>
+            <button type="button" class="pill-btn" data-val="C">C</button>
+          </div>
+        </div>
+        <div class="match-row">
+          <div class="match-prompt">Number: <strong>14</strong></div>
+          <div class="pill-group" data-question="q2-14">
+            <button type="button" class="pill-btn" data-val="A">A</button>
+            <button type="button" class="pill-btn" data-val="B">B</button>
+            <button type="button" class="pill-btn" data-val="C">C</button>
+          </div>
+        </div>
+      </div>
+      <div class="q-feedback" id="fb-q2"></div>
+    </div>
+
+    <!-- QUESTION 3 -->
+    <div class="q-card" id="card-q3">
+      <div class="q-header">
+        <div class="q-num">3</div>
+        <p class="q-title">
+          <strong>Complete the Missing Letters:</strong> Write the missing letters to spell each number word correctly.
+        </p>
+      </div>
+
+      <div class="spelling-list">
+        <!-- 7: S _ V _ N -->
+        <div class="spelling-card">
+          <div class="spelling-num">7</div>
+          <div class="letter-slots">
+            <div class="fixed-letter">S</div>
+            <input type="text" maxlength="1" class="slot-input" id="q3-7-1" autocomplete="off" />
+            <div class="fixed-letter">V</div>
+            <input type="text" maxlength="1" class="slot-input" id="q3-7-2" autocomplete="off" />
+            <div class="fixed-letter">N</div>
+          </div>
+        </div>
+
+        <!-- 12: T W _ L V _ -->
+        <div class="spelling-card">
+          <div class="spelling-num">12</div>
+          <div class="letter-slots">
+            <div class="fixed-letter">T</div>
+            <div class="fixed-letter">W</div>
+            <input type="text" maxlength="1" class="slot-input" id="q3-12-1" autocomplete="off" />
+            <div class="fixed-letter">L</div>
+            <div class="fixed-letter">V</div>
+            <input type="text" maxlength="1" class="slot-input" id="q3-12-2" autocomplete="off" />
+          </div>
+        </div>
+
+        <!-- 15: F _ F T _ _ N -->
+        <div class="spelling-card">
+          <div class="spelling-num">15</div>
+          <div class="letter-slots">
+            <div class="fixed-letter">F</div>
+            <input type="text" maxlength="1" class="slot-input" id="q3-15-1" autocomplete="off" />
+            <div class="fixed-letter">F</div>
+            <div class="fixed-letter">T</div>
+            <input type="text" maxlength="1" class="slot-input" id="q3-15-2" autocomplete="off" />
+            <input type="text" maxlength="1" class="slot-input" id="q3-15-3" autocomplete="off" />
+            <div class="fixed-letter">N</div>
+          </div>
+        </div>
+      </div>
+      <div class="q-feedback" id="fb-q3"></div>
+    </div>
+
+    <!-- PART II -->
+    <div class="part-banner">🏃 PART II: ACTIONS &amp; BODY MOVEMENTS</div>
+
+    <!-- QUESTION 4 -->
+    <div class="q-card" id="card-q4">
+      <div class="q-header">
+        <div class="q-num">4</div>
+        <p class="q-title">
+          <strong>Action Detective:</strong> Look at the four scenes in Figure 2. Match each action phrase to the correct picture letter (<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, or <strong>D</strong>).
+        </p>
+      </div>
+
+      <div class="figure-box">
+        <div class="scenes-grid">
+          <!-- Scene A: Touch head -->
+          <div class="scene-card">
+            <span class="scene-letter">A</span>
+            <svg viewBox="0 0 140 130" width="100%" height="125">
+              <circle cx="70" cy="65" r="28" fill="#fed7aa" stroke="#1e293b" stroke-width="3"/>
+              <path d="M44 55 Q70 25 96 55" fill="#d97706" stroke="#1e293b" stroke-width="3"/>
+              <circle cx="60" cy="63" r="3" fill="#1e293b"/>
+              <circle cx="80" cy="63" r="3" fill="#1e293b"/>
+              <path d="M62 75 Q70 83 78 75" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+              <!-- Arms touching head -->
+              <path d="M42 98 Q25 65 52 38" fill="none" stroke="#fed7aa" stroke-width="11" stroke-linecap="round"/>
+              <path d="M42 98 Q25 65 52 38" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+              <path d="M98 98 Q115 65 88 38" fill="none" stroke="#fed7aa" stroke-width="11" stroke-linecap="round"/>
+              <path d="M98 98 Q115 65 88 38" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+              <rect x="44" y="93" width="52" height="30" rx="10" fill="#38bdf8" stroke="#1e293b" stroke-width="3"/>
+              <path d="M22 52 Q18 65 22 78 M118 52 Q122 65 118 78" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Scene B: Clap hands -->
+          <div class="scene-card">
+            <span class="scene-letter">B</span>
+            <svg viewBox="0 0 140 130" width="100%" height="125">
+              <circle cx="44" cy="46" r="11" fill="#78350f" stroke="#1e293b" stroke-width="3"/>
+              <circle cx="96" cy="46" r="11" fill="#78350f" stroke="#1e293b" stroke-width="3"/>
+              <circle cx="70" cy="62" r="26" fill="#fed7aa" stroke="#1e293b" stroke-width="3"/>
+              <path d="M45 55 Q70 30 95 55" fill="#78350f" stroke="#1e293b" stroke-width="3"/>
+              <circle cx="61" cy="61" r="3" fill="#1e293b"/>
+              <circle cx="79" cy="61" r="3" fill="#1e293b"/>
+              <path d="M63 72 Q70 80 77 72" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+              <rect x="46" y="88" width="48" height="34" rx="10" fill="#34d399" stroke="#1e293b" stroke-width="3"/>
+              <!-- Clapping hands -->
+              <ellipse cx="78" cy="96" rx="9" ry="14" transform="rotate(-20 78 96)" fill="#fed7aa" stroke="#1e293b" stroke-width="3"/>
+              <ellipse cx="86" cy="98" rx="9" ry="14" transform="rotate(15 86 98)" fill="#fed7aa" stroke="#1e293b" stroke-width="3"/>
+              <path d="M64 85 L58 80 M102 86 L108 81 M104 98 L111 98" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Scene C: Jump legs -->
+          <div class="scene-card">
+            <span class="scene-letter">C</span>
+            <svg viewBox="0 0 140 130" width="100%" height="125">
+              <circle cx="70" cy="34" r="18" fill="#b45309" stroke="#1e293b" stroke-width="3"/>
+              <circle cx="65" cy="34" r="2.5" fill="#1e293b"/>
+              <circle cx="76" cy="34" r="2.5" fill="#1e293b"/>
+              <path d="M66 41 Q71 46 76 41" fill="none" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round"/>
+              <rect x="54" y="52" width="32" height="32" rx="8" fill="#10b981" stroke="#1e293b" stroke-width="3"/>
+              <path d="M54 58 L38 74 M86 58 L102 74" stroke="#10b981" stroke-width="8" stroke-linecap="round"/>
+              <rect x="56" y="82" width="28" height="14" rx="4" fill="#f97316" stroke="#1e293b" stroke-width="2.5"/>
+              <!-- Bent jumping legs -->
+              <path d="M62 96 L52 108 L62 114" fill="none" stroke="#1e293b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M78 96 L88 106 L80 114" fill="none" stroke="#1e293b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M44 120 Q52 114 60 120 M80 120 Q88 114 96 120" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Scene D: Stomp foot -->
+          <div class="scene-card">
+            <span class="scene-letter">D</span>
+            <svg viewBox="0 0 140 130" width="100%" height="125">
+              <path d="M58 20 L68 75 L86 72 L76 20" fill="#fed7aa" stroke="#1e293b" stroke-width="3"/>
+              <rect x="64" y="66" width="24" height="14" fill="#ffffff" stroke="#1e293b" stroke-width="3"/>
+              <!-- Sneaker -->
+              <path d="M60 80 L94 80 Q114 82 114 98 L58 98 Z" fill="#ef4444" stroke="#1e293b" stroke-width="3"/>
+              <rect x="58" y="96" width="56" height="8" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="3"/>
+              <!-- Impact lines -->
+              <line x1="35" y1="110" x2="122" y2="110" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+              <path d="M45 95 L34 86 M108 75 L118 65 M50 75 L40 65" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="figure-caption">Figure 2: Observe the body part and the movement in each box.</div>
+      </div>
+
+      <div class="match-table">
+        <div class="match-row">
+          <div class="match-prompt">1. HANDS → <strong>clap</strong></div>
+          <div class="pill-group" data-question="q4-1">
+            <button type="button" class="pill-btn" data-val="A">A</button>
+            <button type="button" class="pill-btn" data-val="B">B</button>
+            <button type="button" class="pill-btn" data-val="C">C</button>
+            <button type="button" class="pill-btn" data-val="D">D</button>
+          </div>
+        </div>
+        <div class="match-row">
+          <div class="match-prompt">2. FOOT → <strong>stomp</strong></div>
+          <div class="pill-group" data-question="q4-2">
+            <button type="button" class="pill-btn" data-val="A">A</button>
+            <button type="button" class="pill-btn" data-val="B">B</button>
+            <button type="button" class="pill-btn" data-val="C">C</button>
+            <button type="button" class="pill-btn" data-val="D">D</button>
+          </div>
+        </div>
+        <div class="match-row">
+          <div class="match-prompt">3. HEAD → <strong>touch</strong></div>
+          <div class="pill-group" data-question="q4-3">
+            <button type="button" class="pill-btn" data-val="A">A</button>
+            <button type="button" class="pill-btn" data-val="B">B</button>
+            <button type="button" class="pill-btn" data-val="C">C</button>
+            <button type="button" class="pill-btn" data-val="D">D</button>
+          </div>
+        </div>
+        <div class="match-row">
+          <div class="match-prompt">4. LEGS → <strong>jump</strong></div>
+          <div class="pill-group" data-question="q4-4">
+            <button type="button" class="pill-btn" data-val="A">A</button>
+            <button type="button" class="pill-btn" data-val="B">B</button>
+            <button type="button" class="pill-btn" data-val="C">C</button>
+            <button type="button" class="pill-btn" data-val="D">D</button>
+          </div>
+        </div>
+      </div>
+      <div class="q-feedback" id="fb-q4"></div>
+    </div>
+
+    <!-- QUESTION 5 -->
+    <div class="q-card" id="card-q5">
+      <div class="q-header">
+        <div class="q-num">5</div>
+        <p class="q-title">
+          <strong>Circle the Correct Action:</strong> Read each sentence and tap the right verb (<strong>stretch</strong> or <strong>shake</strong>) to circle it.
+        </p>
+      </div>
+
+      <div class="sentence-row" data-circle-group="q5-a">
+        <span>a) I (</span>
+        <button type="button" class="word-choice" data-val="stretch">stretch</button>
+        <span>/</span>
+        <button type="button" class="word-choice" data-val="shake">shake</button>
+        <span>) my <strong>ARMS</strong> up high to the sky.</span>
+      </div>
+
+      <div class="sentence-row" data-circle-group="q5-b">
+        <span>b) I (</span>
+        <button type="button" class="word-choice" data-val="stretch">stretch</button>
+        <span>/</span>
+        <button type="button" class="word-choice" data-val="shake">shake</button>
+        <span>) my whole <strong>BODY</strong> when I dance.</span>
+      </div>
+      <div class="q-feedback" id="fb-q5"></div>
+    </div>
+
+    <!-- PART III -->
+    <div class="part-banner">🧍 PART III: BODY PARTS</div>
+
+    <!-- QUESTION 6 -->
+    <div class="q-card" id="card-q6">
+      <div class="q-header">
+        <div class="q-num">6</div>
+        <p class="q-title">
+          <strong>Circle the Correct Body Part:</strong> Read the short clue and tap the right word to circle it.
+        </p>
+      </div>
+
+      <div class="sentence-row" data-circle-group="q6-1">
+        <span>I smell with my:</span>
+        <button type="button" class="word-choice" data-val="EARS">EARS</button>
+        <button type="button" class="word-choice" data-val="NOSE">NOSE</button>
+        <button type="button" class="word-choice" data-val="KNEES">KNEES</button>
+      </div>
+
+      <div class="sentence-row" data-circle-group="q6-2">
+        <span>I see with my:</span>
+        <button type="button" class="word-choice" data-val="EYES">EYES</button>
+        <button type="button" class="word-choice" data-val="MOUTH">MOUTH</button>
+        <button type="button" class="word-choice" data-val="TOES">TOES</button>
+      </div>
+
+      <div class="sentence-row" data-circle-group="q6-3">
+        <span>I eat and smile with my:</span>
+        <button type="button" class="word-choice" data-val="SHOULDERS">SHOULDERS</button>
+        <button type="button" class="word-choice" data-val="MOUTH">MOUTH</button>
+        <button type="button" class="word-choice" data-val="HEAD">HEAD</button>
+      </div>
+      <div class="q-feedback" id="fb-q6"></div>
+    </div>
+
+    <!-- QUESTION 7 -->
+    <div class="q-card" id="card-q7">
+      <div class="q-header">
+        <div class="q-num">7</div>
+        <p class="q-title">
+          <strong>Odd One Out:</strong> Tap the word that does <strong>NOT</strong> belong to the group and explain why in Spanish or English.
+        </p>
+      </div>
+
+      <div class="sentence-row" data-circle-group="q7-word" style="justify-content:center;">
+        <button type="button" class="word-choice" data-val="EYES">EYES</button>
+        <button type="button" class="word-choice" data-val="EARS">EARS</button>
+        <button type="button" class="word-choice" data-val="SHOULDERS">SHOULDERS</button>
+        <button type="button" class="word-choice" data-val="MOUTH">MOUTH</button>
+        <button type="button" class="word-choice" data-val="NOSE">NOSE</button>
+      </div>
+
+      <div class="explain-box">
+        <label for="q7-why">Why doesn't it belong? (Escribe por qué no pertenece al grupo en español o inglés):</label>
+        <input type="text" class="explain-input" id="q7-why" placeholder="Example: Las demás son partes de la cara / They are on the face..." />
+      </div>
+      <div class="q-feedback" id="fb-q7"></div>
+    </div>
+
+    <!-- PART IV -->
+    <div class="part-banner">🔷 PART IV: GEOMETRIC SHAPES (Bilingual &amp; Visual Logic)</div>
+
+    <!-- QUESTION 8 -->
+    <div class="q-card" id="card-q8">
+      <div class="q-header">
+        <div class="q-num">8</div>
+        <p class="q-title">
+          <strong>Shape Robot Inspection:</strong> Look carefully at Figure 3 and count how many shapes form the robot.
+        </p>
+      </div>
+
+      <div class="robot-layout">
+        <div class="robot-svg-box">
+          <!-- Vector Robot matching Figure 3 -->
+          <svg viewBox="0 0 220 290" width="100%" height="265">
+            <!-- Hat Triangle -->
+            <polygon points="110,12 72,62 148,62" fill="#38bdf8" stroke="#1e293b" stroke-width="3.5" stroke-linejoin="round"/>
+            <!-- Hat Brim -->
+            <rect x="52" y="62" width="116" height="12" rx="3" fill="#ef4444" stroke="#1e293b" stroke-width="3.5"/>
+            <!-- Head -->
+            <rect x="64" y="74" width="92" height="62" rx="4" fill="#7dd3fc" stroke="#1e293b" stroke-width="3.5"/>
+            <!-- Ears -->
+            <rect x="52" y="88" width="12" height="26" fill="#ef4444" stroke="#1e293b" stroke-width="3"/>
+            <rect x="156" y="88" width="12" height="26" fill="#ef4444" stroke="#1e293b" stroke-width="3"/>
+            <!-- Eyes (Outer circles + inner pupils = 4 circles) -->
+            <circle cx="90" cy="100" r="13" fill="#ffffff" stroke="#1e293b" stroke-width="3"/>
+            <circle cx="90" cy="100" r="6" fill="#1e293b"/>
+            <circle cx="130" cy="100" r="13" fill="#ffffff" stroke="#1e293b" stroke-width="3"/>
+            <circle cx="130" cy="100" r="6" fill="#1e293b"/>
+            <!-- Mouth -->
+            <rect x="92" y="120" width="36" height="8" rx="4" fill="#facc15" stroke="#1e293b" stroke-width="2.5"/>
+            <!-- Neck -->
+            <rect x="98" y="136" width="24" height="10" fill="#94a3b8" stroke="#1e293b" stroke-width="3"/>
+            <!-- Torso -->
+            <rect x="62" y="146" width="96" height="84" rx="4" fill="#38bdf8" stroke="#1e293b" stroke-width="3.5"/>
+            <!-- 3 Stars on torso -->
+            <polygon points="110,154 113,161 121,161 115,166 117,173 110,169 103,173 105,166 99,161 107,161" fill="#ef4444" stroke="#1e293b" stroke-width="2"/>
+            <polygon points="110,178 113,185 121,185 115,190 117,197 110,193 103,197 105,190 99,185 107,185" fill="#facc15" stroke="#1e293b" stroke-width="2"/>
+            <polygon points="110,202 113,209 121,209 115,214 117,221 110,217 103,221 105,214 99,209 107,209" fill="#4ade80" stroke="#1e293b" stroke-width="2"/>
+            <!-- Left Shoulder (Green) & Arm -->
+            <rect x="46" y="146" width="16" height="24" fill="#4ade80" stroke="#1e293b" stroke-width="3"/>
+            <line x1="52" y1="170" x2="36" y2="212" stroke="#38bdf8" stroke-width="10" stroke-linecap="round"/>
+            <line x1="52" y1="170" x2="36" y2="212" stroke="#1e293b" stroke-width="3"/>
+            <rect x="37" y="186" width="16" height="8" transform="rotate(20 45 190)" fill="#facc15" stroke="#1e293b" stroke-width="2.5"/>
+            <!-- Left Hand Circle (5th circle) -->
+            <circle cx="33" cy="218" r="11" fill="#7dd3fc" stroke="#1e293b" stroke-width="3"/>
+            <!-- Right Shoulder (Yellow with Heart) & Arm -->
+            <rect x="158" y="146" width="24" height="24" fill="#facc15" stroke="#1e293b" stroke-width="3"/>
+            <path d="M170 164 C162 157 162 150 167 150 C169 150 170 152 170 153 C170 152 171 150 173 150 C178 150 178 157 170 164 Z" fill="#ef4444" stroke="#1e293b" stroke-width="1.8"/>
+            <line x1="170" y1="170" x2="184" y2="212" stroke="#38bdf8" stroke-width="10" stroke-linecap="round"/>
+            <line x1="170" y1="170" x2="184" y2="212" stroke="#1e293b" stroke-width="3"/>
+            <rect x="169" y="186" width="16" height="8" transform="rotate(-20 177 190)" fill="#facc15" stroke="#1e293b" stroke-width="2.5"/>
+            <!-- Right Hand Circle (6th circle) -->
+            <circle cx="187" cy="218" r="11" fill="#7dd3fc" stroke="#1e293b" stroke-width="3"/>
+            <!-- Legs -->
+            <rect x="78" y="230" width="18" height="16" fill="#facc15" stroke="#1e293b" stroke-width="3"/>
+            <rect x="78" y="246" width="18" height="16" fill="#38bdf8" stroke="#1e293b" stroke-width="3"/>
+            <rect x="70" y="262" width="32" height="14" rx="2" fill="#ef4444" stroke="#1e293b" stroke-width="3"/>
+
+            <rect x="124" y="230" width="18" height="16" fill="#facc15" stroke="#1e293b" stroke-width="3"/>
+            <rect x="124" y="246" width="18" height="16" fill="#4ade80" stroke="#1e293b" stroke-width="3"/>
+            <rect x="118" y="262" width="32" height="14" rx="2" fill="#ef4444" stroke="#1e293b" stroke-width="3"/>
+          </svg>
+          <div class="figure-caption">Figure 3: Count the shapes carefully.</div>
+        </div>
+
+        <div class="shape-counters">
+          <div class="counter-card">
+            <h4>Circles (Círculos)</h4>
+            <div class="stepper">
+              <button type="button" class="step-btn" onclick="changeCount('circles', -1)">−</button>
+              <span class="step-val" id="val-circles">0</span>
+              <button type="button" class="step-btn" onclick="changeCount('circles', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="counter-card">
+            <h4>Triangles (Triángulos)</h4>
+            <div class="stepper">
+              <button type="button" class="step-btn" onclick="changeCount('triangles', -1)">−</button>
+              <span class="step-val" id="val-triangles">0</span>
+              <button type="button" class="step-btn" onclick="changeCount('triangles', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="counter-card">
+            <h4>Stars (Estrellas)</h4>
+            <div class="stepper">
+              <button type="button" class="step-btn" onclick="changeCount('stars', -1)">−</button>
+              <span class="step-val" id="val-stars">0</span>
+              <button type="button" class="step-btn" onclick="changeCount('stars', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="counter-card">
+            <h4>Hearts (Corazones)</h4>
+            <div class="stepper">
+              <button type="button" class="step-btn" onclick="changeCount('hearts', -1)">−</button>
+              <span class="step-val" id="val-hearts">0</span>
+              <button type="button" class="step-btn" onclick="changeCount('hearts', 1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="q-feedback" id="fb-q8"></div>
+    </div>
+
+    <!-- QUESTION 9 -->
+    <div class="q-card" id="card-q9">
+      <div class="q-header">
+        <div class="q-num">9</div>
+        <p class="q-title">
+          <strong>Match English and Spanish:</strong> Tap the matching letter (<strong>A</strong>, <strong>B</strong>, or <strong>C</strong>) next to each shape in English.
+        </p>
+      </div>
+
+      <div class="legend-box">
+        <div class="legend-tag">A. CORAZÓN</div>
+        <div class="legend-tag">B. RECTÁNGULO</div>
+        <div class="legend-tag">C. CUADRADO</div>
+      </div>
+
+      <div class="match-table">
+        <div class="match-row">
+          <div class="match-prompt"><strong>SQUARE</strong></div>
+          <div class="pill-group" data-question="q9-square">
+            <button type="button" class="pill-btn" data-val="A">A</button>
+            <button type="button" class="pill-btn" data-val="B">B</button>
+            <button type="button" class="pill-btn" data-val="C">C</button>
+          </div>
+        </div>
+        <div class="match-row">
+          <div class="match-prompt"><strong>HEART</strong></div>
+          <div class="pill-group" data-question="q9-heart">
+            <button type="button" class="pill-btn" data-val="A">A</button>
+            <button type="button" class="pill-btn" data-val="B">B</button>
+            <button type="button" class="pill-btn" data-val="C">C</button>
+          </div>
+        </div>
+        <div class="match-row">
+          <div class="match-prompt"><strong>RECTANGLE</strong></div>
+          <div class="pill-group" data-question="q9-rectangle">
+            <button type="button" class="pill-btn" data-val="A">A</button>
+            <button type="button" class="pill-btn" data-val="B">B</button>
+            <button type="button" class="pill-btn" data-val="C">C</button>
+          </div>
+        </div>
+      </div>
+      <div class="q-feedback" id="fb-q9"></div>
+    </div>
+
+    <!-- QUESTION 10 -->
+    <div class="q-card" id="card-q10">
+      <div class="q-header">
+        <div class="q-num">10</div>
+        <p class="q-title">
+          <strong>Draw the Shapes:</strong> Inside the box below, draw <strong>ONE CIRCLE</strong>, <strong>ONE TRIANGLE</strong>, and <strong>ONE STAR</strong>.
+        </p>
+      </div>
+
+      <div class="canvas-toolbar">
+        <span style="font-weight:800;">Colors:</span>
+        <button type="button" class="color-dot active" style="background:#2563eb;" onclick="setColor('#2563eb', this)"></button>
+        <button type="button" class="color-dot" style="background:#ef4444;" onclick="setColor('#ef4444', this)"></button>
+        <button type="button" class="color-dot" style="background:#16a34a;" onclick="setColor('#16a34a', this)"></button>
+        <button type="button" class="color-dot" style="background:#f59e0b;" onclick="setColor('#f59e0b', this)"></button>
+        <button type="button" class="color-dot" style="background:#1e293b;" onclick="setColor('#1e293b', this)"></button>
+        <div style="flex:1;"></div>
+        <button type="button" class="tool-btn" onclick="undoCanvas()">↩ Undo</button>
+        <button type="button" class="tool-btn" onclick="clearCanvas()">🗑️ Clear Box</button>
+      </div>
+
+      <canvas id="drawCanvas"></canvas>
+      <div class="q-feedback" id="fb-q10"></div>
+    </div>
+
+    <!-- SUBMIT & FINAL GRADE -->
+    <div class="submit-area">
+      <button type="button" class="btn-finish" onclick="gradeExam()">
+        ✅ FINISH &amp; SEE MY GRADE!
+      </button>
+
+      <div class="results-modal" id="resultsModal">
+        <div class="stars-display" id="starsDisplay">⭐⭐⭐⭐⭐</div>
+        <div style="font-weight:800; color:#64748b; text-transform:uppercase;">Final Grade / Calificación Final</div>
+        <div class="final-grade-big" id="finalGradeText">10 / 10</div>
+        <div class="result-message" id="resultMessage">Awesome job!</div>
+        <div class="breakdown-grid" id="breakdownGrid"></div>
+        <button type="button" class="btn-retry" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+          🔝 Review My Answers Above
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Set today's date automatically
+    document.getElementById('testDate').valueAsDate = new Date();
+
+    // 1. Build interactive counting rows for Figure 1 (14 apples, 11 stars, 20 pencils)
+    function buildCountRow(containerId, badgeId, emoji, count) {
+      const container = document.getElementById(containerId);
+      const badge = document.getElementById(badgeId);
+      for (let i = 0; i < count; i++) {
+        const item = document.createElement('span');
+        item.className = 'count-item';
+        item.textContent = emoji;
+        item.onclick = () => {
+          item.classList.toggle('counted');
+          const tapped = container.querySelectorAll('.count-item.counted').length;
+          badge.textContent = `Tapped: ${tapped}`;
+        };
+        container.appendChild(item);
+      }
+    }
+
+    buildCountRow('row-apples', 'tap-apples', '🍎', 14);
+    buildCountRow('row-stars', 'tap-stars', '⭐', 11);
+    buildCountRow('row-pencils', 'tap-pencils', '✏️', 20);
+
+    // 2. Pill buttons selection (Q2, Q4, Q9)
+    const pillSelections = {};
+    document.querySelectorAll('.pill-group').forEach(group => {
+      const qKey = group.getAttribute('data-question');
+      group.querySelectorAll('.pill-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          group.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          pillSelections[qKey] = btn.getAttribute('data-val');
+        });
+      });
+    });
+
+    // 3. Auto-advance single-letter inputs in Q3
+    const slotInputs = Array.from(document.querySelectorAll('.slot-input'));
+    slotInputs.forEach((inp, idx) => {
+      inp.addEventListener('input', () => {
+        inp.value = inp.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
+        if (inp.value.length === 1 && idx + 1 < slotInputs.length) {
+          slotInputs[idx + 1].focus();
+        }
+      });
+      inp.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && inp.value === '' && idx > 0) {
+          slotInputs[idx - 1].focus();
+        }
+      });
+    });
+
+    // 4. Word circle selection (Q5, Q6, Q7)
+    const circleSelections = {};
+    document.querySelectorAll('[data-circle-group]').forEach(group => {
+      const gKey = group.getAttribute('data-circle-group');
+      group.querySelectorAll('.word-choice').forEach(btn => {
+        btn.addEventListener('click', () => {
+          group.querySelectorAll('.word-choice').forEach(b => b.classList.remove('circled'));
+          btn.classList.add('circled');
+          circleSelections[gKey] = btn.getAttribute('data-val');
+        });
+      });
+    });
+
+    // 5. Robot Shape Counters (Q8)
+    const robotCounts = { circles: 0, triangles: 0, stars: 0, hearts: 0 };
+    function changeCount(shape, delta) {
+      robotCounts[shape] = Math.max(0, Math.min(20, robotCounts[shape] + delta));
+      document.getElementById(`val-${shape}`).textContent = robotCounts[shape];
+    }
+
+    // 6. Drawing Canvas (Q10)
+    const canvas = document.getElementById('drawCanvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+    let currentColor = '#2563eb';
+    let strokes = [];
+    let currentStroke = [];
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      redrawCanvas();
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    setTimeout(resizeCanvas, 50);
+
+    function setColor(color, el) {
+      currentColor = color;
+      document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function startDraw(e) {
+      e.preventDefault();
+      drawing = true;
+      const pos = getPos(e);
+      currentStroke = [{ x: pos.x, y: pos.y, color: currentColor }];
+    }
+
+    function moveDraw(e) {
+      if (!drawing) return;
+      e.preventDefault();
+      const pos = getPos(e);
+      currentStroke.push({ x: pos.x, y: pos.y, color: currentColor });
+      redrawCanvas();
+      drawSingleStroke(currentStroke);
+    }
+
+    function endDraw() {
+      if (!drawing) return;
+      drawing = false;
+      if (currentStroke.length > 1) {
+        strokes.push(currentStroke);
+      }
+      currentStroke = [];
+    }
+
+    function drawSingleStroke(pts) {
+      if (pts.length < 2) return;
+      ctx.beginPath();
+      ctx.strokeStyle = pts[0].color;
+      ctx.lineWidth = 4.5;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.moveTo(pts[0].x, pts[0].y);
+      for (let i = 1; i < pts.length; i++) {
+        ctx.lineTo(pts[i].x, pts[i].y);
+      }
+      ctx.stroke();
+    }
+
+    function redrawCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+      strokes.forEach(drawSingleStroke);
+    }
+
+    function undoCanvas() {
+      strokes.pop();
+      redrawCanvas();
+    }
+
+    function clearCanvas() {
+      strokes = [];
+      redrawCanvas();
+    }
+
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', moveDraw);
+    window.addEventListener('mouseup', endDraw);
+
+    canvas.addEventListener('touchstart', startDraw, { passive: false });
+    canvas.addEventListener('touchmove', moveDraw, { passive: false });
+    window.addEventListener('touchend', endDraw);
+
+    // 7. Automatic Grading Engine (10 points total, 1 pt per question)
+    function setFeedback(qNum, score, msg) {
+      const card = document.getElementById(`card-q${qNum}`);
+      const fb = document.getElementById(`fb-q${qNum}`);
+      card.classList.remove('graded-correct', 'graded-partial', 'graded-wrong');
+      fb.classList.remove('fb-ok', 'fb-part', 'fb-bad');
+      fb.classList.add('show');
+
+      if (score >= 0.99) {
+        card.classList.add('graded-correct');
+        fb.classList.add('fb-ok');
+        fb.innerHTML = `✅ Correct! (${score.toFixed(2).replace(/\.00$/, '')} / 1 pt) — ${msg}`;
+      } else if (score > 0) {
+        card.classList.add('graded-partial');
+        fb.classList.add('fb-part');
+        fb.innerHTML = `🟡 Partial credit (${score.toFixed(2)} / 1 pt) — ${msg}`;
+      } else {
+        card.classList.add('graded-wrong');
+        fb.classList.add('fb-bad');
+        fb.innerHTML = `❌ Needs review (0 / 1 pt) — ${msg}`;
+      }
+    }
+
+    function gradeExam() {
+      const scores = [];
+
+      // Q1: Row A = FOURTEEN (14), Row B = ELEVEN (11), Row C = TWENTY (20)
+      const a1 = document.getElementById('q1-a').value.trim().toUpperCase();
+      const b1 = document.getElementById('q1-b').value.trim().toUpperCase();
+      const c1 = document.getElementById('q1-c').value.trim().toUpperCase();
+      let q1Hits = 0;
+      if (a1 === 'FOURTEEN') q1Hits++;
+      if (b1 === 'ELEVEN') q1Hits++;
+      if (c1 === 'TWENTY') q1Hits++;
+      const s1 = q1Hits / 3;
+      scores.push(s1);
+      setFeedback(1, s1, 'Row A: FOURTEEN (14), Row B: ELEVEN (11), Row C: TWENTY (20).');
+
+      // Q2: 11 -> C, 20 -> A, 14 -> B
+      let q2Hits = 0;
+      if (pillSelections['q2-11'] === 'C') q2Hits++;
+      if (pillSelections['q2-20'] === 'A') q2Hits++;
+      if (pillSelections['q2-14'] === 'B') q2Hits++;
+      const s2 = q2Hits / 3;
+      scores.push(s2);
+      setFeedback(2, s2, '11 = C (ELEVEN), 20 = A (TWENTY), 14 = B (FOURTEEN).');
+
+      // Q3: SEVEN (E, E), TWELVE (E, E), FIFTEEN (I, E, E)
+      let q3Hits = 0;
+      if (document.getElementById('q3-7-1').value.toUpperCase() === 'E' &&
+          document.getElementById('q3-7-2').value.toUpperCase() === 'E') q3Hits++;
+      if (document.getElementById('q3-12-1').value.toUpperCase() === 'E' &&
+          document.getElementById('q3-12-2').value.toUpperCase() === 'E') q3Hits++;
+      if (document.getElementById('q3-15-1').value.toUpperCase() === 'I' &&
+          document.getElementById('q3-15-2').value.toUpperCase() === 'E' &&
+          document.getElementById('q3-15-3').value.toUpperCase() === 'E') q3Hits++;
+      const s3 = q3Hits / 3;
+      scores.push(s3);
+      setFeedback(3, s3, '7: S E V E N • 12: T W E L V E • 15: F I F T E E N.');
+
+      // Q4: 1->B, 2->D, 3->A, 4->C
+      let q4Hits = 0;
+      if (pillSelections['q4-1'] === 'B') q4Hits++;
+      if (pillSelections['q4-2'] === 'D') q4Hits++;
+      if (pillSelections['q4-3'] === 'A') q4Hits++;
+      if (pillSelections['q4-4'] === 'C') q4Hits++;
+      const s4 = q4Hits / 4;
+      scores.push(s4);
+      setFeedback(4, s4, '1. HANDS → B, 2. FOOT → D, 3. HEAD → A, 4. LEGS → C.');
+
+      // Q5: a -> stretch, b -> shake
+      let q5Hits = 0;
+      if (circleSelections['q5-a'] === 'stretch') q5Hits++;
+      if (circleSelections['q5-b'] === 'shake') q5Hits++;
+      const s5 = q5Hits / 2;
+      scores.push(s5);
+      setFeedback(5, s5, 'a) stretch my ARMS • b) shake my whole BODY.');
+
+      // Q6: 1->NOSE, 2->EYES, 3->MOUTH
+      let q6Hits = 0;
+      if (circleSelections['q6-1'] === 'NOSE') q6Hits++;
+      if (circleSelections['q6-2'] === 'EYES') q6Hits++;
+      if (circleSelections['q6-3'] === 'MOUTH') q6Hits++;
+      const s6 = q6Hits / 3;
+      scores.push(s6);
+      setFeedback(6, s6, 'Smell: NOSE • See: EYES • Eat and smile: MOUTH.');
+
+      // Q7: SHOULDERS (0.5 pt) + explanation (0.5 pt)
+      let s7 = 0;
+      if (circleSelections['q7-word'] === 'SHOULDERS') s7 += 0.5;
+      const whyText = document.getElementById('q7-why').value.trim();
+      if (whyText.length >= 4) s7 += 0.5;
+      scores.push(s7);
+      setFeedback(7, s7, 'Odd word: SHOULDERS (the others are on the face/head).');
+
+      // Q8: Circles = 6 (or 4), Triangles = 1, Stars = 3, Hearts = 1
+      let q8Hits = 0;
+      if (robotCounts.circles === 6 || robotCounts.circles === 4) q8Hits++;
+      if (robotCounts.triangles === 1) q8Hits++;
+      if (robotCounts.stars === 3) q8Hits++;
+      if (robotCounts.hearts === 1) q8Hits++;
+      const s8 = q8Hits / 4;
+      scores.push(s8);
+      setFeedback(8, s8, 'Circles: 6 (or 4), Triangles: 1, Stars: 3, Hearts: 1.');
+
+      // Q9: SQUARE -> C, HEART -> A, RECTANGLE -> B
+      let q9Hits = 0;
+      if (pillSelections['q9-square'] === 'C') q9Hits++;
+      if (pillSelections['q9-heart'] === 'A') q9Hits++;
+      if (pillSelections['q9-rectangle'] === 'B') q9Hits++;
+      const s9 = q9Hits / 3;
+      scores.push(s9);
+      setFeedback(9, s9, 'SQUARE = C (CUADRADO), HEART = A (CORAZÓN), RECTANGLE = B (RECTÁNGULO).');
+
+      // Q10: Check if student drew shapes (at least 3 strokes or significant drawing points)
+      const totalPoints = strokes.reduce((acc, st) => acc + st.length, 0);
+      const s10 = (strokes.length >= 3 || totalPoints >= 25) ? 1 : (strokes.length > 0 ? 0.5 : 0);
+      scores.push(s10);
+      setFeedback(10, s10, s10 === 1 ? 'Great drawing of the Circle, Triangle, and Star!' : 'Please draw all 3 shapes inside the box.');
+
+      // Total Score over 10
+      const total = scores.reduce((a, b) => a + b, 0);
+      const roundedTotal = Math.round(total * 10) / 10;
+
+      document.getElementById('topScore').textContent = `${roundedTotal} / 10`;
+      document.getElementById('finalGradeText').textContent = `${roundedTotal} / 10`;
+
+      const studentName = document.getElementById('studentName').value.trim();
+      const namePrefix = studentName ? `${studentName}, ` : '';
+
+      let stars = '⭐⭐⭐⭐⭐';
+      let msg = `${namePrefix}Excellent work! You are an English Superstar!`;
+      if (roundedTotal < 5) {
+        stars = '⭐⭐';
+        msg = `${namePrefix}Good try! Review the yellow and red boxes to keep practicing.`;
+      } else if (roundedTotal < 8) {
+        stars = '⭐⭐⭐';
+        msg = `${namePrefix}Good job! Check the feedback above to get 10/10 next time.`;
+      } else if (roundedTotal < 9.5) {
+        stars = '⭐⭐⭐⭐';
+        msg = `${namePrefix}Great job! Almost a perfect score!`;
+      }
+
+      document.getElementById('starsDisplay').textContent = stars;
+      document.getElementById('resultMessage').textContent = msg;
+
+      // Breakdown pills Q1..Q10
+      const bdGrid = document.getElementById('breakdownGrid');
+      bdGrid.innerHTML = '';
+      scores.forEach((sc, i) => {
+        const div = document.createElement('div');
+        div.className = 'bd-item ' + (sc >= 0.99 ? 'bd-ok' : sc > 0 ? 'bd-part' : 'bd-bad');
+        div.textContent = `Q${i + 1}: ${sc.toFixed(1).replace(/\.0$/, '')}/1`;
+        bdGrid.appendChild(div);
+      });
+
+      const modal = document.getElementById('resultsModal');
+      modal.style.display = 'block';
+      modal.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
